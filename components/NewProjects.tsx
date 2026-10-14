@@ -11,20 +11,22 @@ const IMG = {
   hill: {
     pin: { src: "hill-sunset", w: 1280, h: 699 },
     gallery: [
-      { src: "hill-promenade", w: 1280, h: 714 },
-      { src: "hill-entree", w: 1040, h: 224 },
+      { src: "hill-promenade", w: 900, h: 502 },
+      { src: "hill-entree", w: 900, h: 194 },
     ],
   },
   cal: {
-    pin: { src: "cal-angle", w: 2752, h: 1536 },
+    pin: { src: "cal-angle", w: 1400, h: 781 },
     gallery: [
-      { src: "cal-aerien", w: 2752, h: 1536 },
-      { src: "cal-facade", w: 2752, h: 1536 },
+      { src: "cal-aerien", w: 900, h: 502 },
+      { src: "cal-facade", w: 900, h: 502 },
     ],
   },
 } satisfies Record<string, { pin: Img; gallery: Img[] }>;
 
-const srcSet = (name: string) => `/p/${name}-1000.webp 1000w, /p/${name}-2000.webp 2000w`;
+// Les rendus sont servis depuis /p en local, ou depuis un CDN si NEXT_PUBLIC_MEDIA_BASE est défini
+const MEDIA = process.env.NEXT_PUBLIC_MEDIA_BASE ?? "/p";
+const src = (name: string) => `${MEDIA}/${name}.avif`;
 
 // Le rendu s'ouvre au scroll à travers une arche, le « portail » de la marque,
 // jusqu'à remplir l'écran. Une seule variable CSS (--p, de 0 à 1) pilote tout.
@@ -122,9 +124,7 @@ function Feature({ id, index }: { id: "hill" | "cal"; index: number }) {
           </p>
           <div className="feat__media">
             <img
-              src={`/p/${img.pin.src}-2000.webp`}
-              srcSet={srcSet(img.pin.src)}
-              sizes="100vw"
+              src={src(img.pin.src)}
               width={img.pin.w}
               height={img.pin.h}
               alt={txt.alt[0]}
@@ -159,9 +159,7 @@ function Feature({ id, index }: { id: "hill" | "cal"; index: number }) {
           <figure key={g.src} className="feat__fig">
             <div className="feat__frame">
               <img
-                src={`/p/${g.src}-2000.webp`}
-                srcSet={srcSet(g.src)}
-                sizes="(max-width: 760px) 100vw, 60vw"
+                src={src(g.src)}
                 width={g.w}
                 height={g.h}
                 alt={txt.alt[i + 1]}
