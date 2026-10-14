@@ -93,18 +93,18 @@ dt { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: 
 }
 .hero__center { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .hero__lame { width: clamp(120px, 14vw, 190px); height: auto; aspect-ratio: 200 / 260; }
-.hero__lame .lame__line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1200ms var(--ease-out) 200ms forwards; }
-.hero__lame .lame__blade { clip-path: inset(0 0 100% 0); animation: blade 1300ms var(--ease-out) 700ms forwards; }
+.hero__lame .lame__line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1200ms var(--ease-out) 750ms forwards; }
+.hero__lame .lame__blade { clip-path: inset(0 0 100% 0); animation: blade 1300ms var(--ease-out) 1250ms forwards; }
 @keyframes trace { to { stroke-dashoffset: 0; } }
 @keyframes blade { to { clip-path: inset(0 0 0 0); } }
 .hero__name {
   margin: clamp(36px, 6vh, 56px) 0 0; font-family: var(--serif); font-weight: 400;
   font-size: clamp(34px, 6vw, 84px); letter-spacing: 0.5em; margin-inline-end: -0.5em; line-height: 1;
-  animation: appear 1200ms var(--ease-out) 1400ms both;
+  animation: appear 1200ms var(--ease-out) 1950ms both;
 }
 .hero__ar { margin: 18px 0 0; font-family: var(--arabic); font-size: clamp(26px, 3vw, 38px); line-height: 1.4; animation: appear 1200ms var(--ease-out) 1650ms both; }
-.hero__line { margin: clamp(28px, 5vh, 48px) 0 0; font-family: var(--serif); font-size: clamp(16px, 1.6vw, 21px); letter-spacing: 0.08em; animation: appear 1200ms var(--ease-out) 1900ms both; }
-.hero__ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; animation: appear 1200ms var(--ease-out) 2100ms both; }
+.hero__line { margin: 0 0 clamp(28px, 5.5vh, 56px); font-family: var(--serif); font-size: clamp(16px, 1.6vw, 21px); letter-spacing: 0.08em; animation: appear 1100ms var(--ease-out) 150ms both; }
+.hero__ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: clamp(36px, 6vh, 56px); animation: appear 1200ms var(--ease-out) 2400ms both; }
 @keyframes appear { from { opacity: 0; transform: translateY(10px); } }
 
 /* ── Le groupe + ligne d'horizon ─────── */
