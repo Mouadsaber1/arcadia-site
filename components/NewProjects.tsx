@@ -5,28 +5,33 @@ import { PROJECTS } from "@/lib/data";
 import { EVT_PICK_PROJECT, scrollToId, type PickProjectDetail } from "@/lib/scroll";
 import { useLang } from "./Lang";
 
-type Img = { src: string; w: number; h: number };
+// sizes : les deux largeurs exportées (petite pour mobile, grande pour écrans larges et rétina)
+type Img = { src: string; w: number; h: number; sizes: [number, number] };
 
 const IMG = {
   hill: {
-    pin: { src: "hill-sunset", w: 1280, h: 699 },
+    pin: { src: "hill-sunset", w: 2560, h: 1398, sizes: [1200, 2400] },
     gallery: [
-      { src: "hill-promenade", w: 900, h: 502 },
-      { src: "hill-entree", w: 900, h: 194 },
+      { src: "hill-promenade", w: 2560, h: 1428, sizes: [900, 1800] },
+      { src: "hill-entree", w: 2080, h: 448, sizes: [900, 1800] },
     ],
   },
   cal: {
-    pin: { src: "cal-angle", w: 1400, h: 781 },
+    pin: { src: "cal-angle", w: 2752, h: 1536, sizes: [1200, 2400] },
     gallery: [
-      { src: "cal-aerien", w: 900, h: 502 },
-      { src: "cal-facade", w: 900, h: 502 },
+      { src: "cal-aerien", w: 2752, h: 1536, sizes: [900, 1800] },
+      { src: "cal-facade", w: 2752, h: 1536, sizes: [900, 1800] },
     ],
   },
 } satisfies Record<string, { pin: Img; gallery: Img[] }>;
 
 // Les rendus sont servis depuis /p en local, ou depuis un CDN si NEXT_PUBLIC_MEDIA_BASE est défini
 const MEDIA = process.env.NEXT_PUBLIC_MEDIA_BASE ?? "/p";
-const src = (name: string) => `${MEDIA}/${name}.avif`;
+const file = (name: string, w: number) => `${MEDIA}/${name}-${w}.avif`;
+const pics = (i: Img) => ({
+  src: file(i.src, i.sizes[1]),
+  srcSet: `${file(i.src, i.sizes[0])} ${i.sizes[0]}w, ${file(i.src, i.sizes[1])} ${i.sizes[1]}w`,
+});
 
 // Le rendu s'ouvre au scroll à travers une arche, le « portail » de la marque,
 // jusqu'à remplir l'écran. Une seule variable CSS (--p, de 0 à 1) pilote tout.
@@ -124,7 +129,8 @@ function Feature({ id, index }: { id: "hill" | "cal"; index: number }) {
           </p>
           <div className="feat__media">
             <img
-              src={src(img.pin.src)}
+              {...pics(img.pin)}
+              sizes="100vw"
               width={img.pin.w}
               height={img.pin.h}
               alt={txt.alt[0]}
@@ -159,7 +165,8 @@ function Feature({ id, index }: { id: "hill" | "cal"; index: number }) {
           <figure key={g.src} className="feat__fig">
             <div className="feat__frame">
               <img
-                src={src(g.src)}
+                {...pics(g)}
+                sizes="(max-width: 900px) 100vw, 58vw"
                 width={g.w}
                 height={g.h}
                 alt={txt.alt[i + 1]}
