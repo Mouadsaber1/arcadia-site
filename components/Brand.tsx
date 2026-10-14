@@ -47,6 +47,20 @@ export function Portal({ className, color = "currentColor", title }: SvgProps) {
   );
 }
 
+// Le portail du deck (« III — Le portail, sur patine profonde ») pour l'ouverture :
+// double cadre qui se trace, puis la lame à l'intérieur.
+export function HeroPortal({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 200 380" aria-hidden="true">
+      <g fill="none" stroke="currentColor">
+        <rect className="portal__outer" x="2" y="2" width="196" height="376" strokeWidth="1.8" pathLength={1} />
+        <rect className="portal__inner" x="11" y="11" width="178" height="358" strokeWidth="0.8" pathLength={1} />
+      </g>
+      <g className="portal__lame" transform="translate(35 112) scale(0.62)">{LAME("currentColor", 3.2)}</g>
+    </svg>
+  );
+}
+
 // Nuance de patine propre à chaque programme (fond, encre)
 export const PROGRAM_TONES = {
   californie: { bg: "#7FA39A", ink: "#1F2A27" },

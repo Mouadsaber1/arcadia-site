@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "Arcadia, promoteur immobilier à Casablanca. Trois adresses : Californie, Abdelmoumen, Ghandi. Visite sur rendez-vous.",
 };
 
-export const viewport: Viewport = { themeColor: "#7FA39A" };
+export const viewport: Viewport = { themeColor: "#2E4A44" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
